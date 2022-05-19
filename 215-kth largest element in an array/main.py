@@ -1,14 +1,18 @@
-from queue import PriorityQueue as PQ
-
-
 class Solution:
     def findKthLargest(self, nums, k):
-        pq = PQ()
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        from heapq import heapify, heappush, heappop
+        heap = []
+        heapify(heap)
         for num in nums:
-            pq.put(num)
-            if pq.qsize() > k:
-                pq.get()
-        return pq.get()
+            heappush(heap, num)
+            if len(heap) > k:
+                heappop(heap)
+        return heappop(heap)
 
 
 nums = [3, 2, 1, 5, 6, 4]
@@ -17,5 +21,5 @@ k = 2
 nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
 k = 4
 
-sol = Solution()
-print(sol.findKthLargest(nums, k))
+solution = Solution()
+print(solution.findKthLargest(nums, k))

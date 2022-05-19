@@ -1,42 +1,37 @@
-class Solution:
+class Solution(object):
     def isValidSerialization(self, preorder):
-        if preorder == '#':
-            return True
+        """
+        :type preorder: str
+        :rtype: bool
+        """
+        stack = []
+        preorder = preorder.split(",")
+        for node in preorder:
+            # (node, False) - this is not a leaf node
+            if node == "#":
+                stack.append([node, True])
+            else:
+                stack.append([node, False])
 
-        class ValidateStack:
-            def __init__(self):
-                self.stack = []
-
-            def add(self, item):
-                self.stack.append(item)
-                #print(self.stack)
-                if len(self.stack) >= 3:
-                    if self.stack[-1] == self.stack[-2] == '#' and self.stack[-3].isdigit():
-                        for i in range(3):
-                            self.stack.pop()
-                        self.add('#')
-                #print(self.stack)
-
-            def validate(self):
-                if len(self.stack) == 1 and self.stack[0] == '#':
-                    return True
+            # validate
+            while len(stack) >= 2 and stack[-1][1] and stack[-2][1]:
+                stack.pop()
+                stack.pop()
+                if stack:
+                    stack[-1][1] = True
                 else:
                     return False
 
-        orders = preorder.split(',')
-        stack = ValidateStack()
-        for order in orders:
-            stack.add(order)
-
-        return stack.validate()
+        if len(stack) == 1 and stack[0][1]:
+            return True
+        else:
+            return False
 
 
 preorder = "9,3,4,#,#,1,#,#,2,#,6,#,#"
 preorder = "1,#"
 preorder = "9,#,#,1"
-preorder = "9,#,92,#,#"
+preorder = "9,3,4,#,#,#,#"
 
-sol = Solution()
-print(sol.isValidSerialization(preorder))
-
-
+solution = Solution()
+print(solution.isValidSerialization(preorder))

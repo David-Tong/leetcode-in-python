@@ -10,6 +10,7 @@ class Solution(object):
         i5 = 0
 
         while len(uglies) <= n:
+            print(uglies)
             next2 = uglies[i2] * 2
             next3 = uglies[i3] * 3
             next5 = uglies[i5] * 5

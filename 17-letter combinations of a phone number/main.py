@@ -25,8 +25,7 @@ class Solution(object):
 
 digits = "23"
 digits = ""
-#digits = "2"
-#digits = "4572596"
+digits = "2"
 
 solution = Solution()
 print(solution.letterCombinations(digits))

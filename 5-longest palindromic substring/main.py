@@ -10,7 +10,7 @@ class Solution(object):
         left = 0
         right = 0
 
-        # dp[x][y] - dp[x+1][y-1] & s[x] == sp[y]
+        # dp[x][y] = dp[x+1][y-1] & s[x] == sp[y]
         for x in range(N - 2, -1, -1):
             dp[x][x] = True
             for y in range(x + 1, N):
