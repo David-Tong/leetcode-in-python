@@ -11,6 +11,7 @@ class Solution(object):
 
         M = len(s1) + 1
         N = len(s2) + 1
+        # dp[x][y] - if s1[:x] and s2[:y] can be an interleaving string
         dp = [[False] * N for x in range(M)]
 
         for x in range(M):

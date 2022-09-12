@@ -44,7 +44,6 @@ class Solution(object):
         nums = negatives + positives
 
         # get max consecutive sequence length
-        print(nums)
         left = 0
         right = 0
         ans = 1
