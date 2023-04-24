@@ -4,7 +4,7 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: int
         """
-        intervals = sorted(intervals, key = lambda x : (x[0], -x[1]))
+        intervals = sorted(intervals, key=lambda x: (x[0], -x[1]))
         right = intervals[0][1]
         ans = 0
         for interval in intervals[1:]:
