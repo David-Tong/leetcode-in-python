@@ -13,27 +13,21 @@ class Solution(object):
         def stoneSum(x, y):
             return presum[y + 1] - presum[x]
 
-        # init dp
-        dp = [[float("-inf")] * (L) for _ in range(L)]
-        dp[0][L - 1] = 0
-
-        # dp transfer
         # dp[x][y] - the maxi difference for stone[x : y + 1]
-        # dp[x][y] = max(dp[x][y], max(stoneSum(x, y) - dp[x - 1][y], stoneSum(x, y) - dp[x][y + 1])
-        ans = 0
-        for k in range(L - 1, -1, -1):
-            for x in range(L - k):
-                if x > 0:
-                    dp[x][x + k] = max(dp[x][x + k], stoneSum(x, x + k) - dp[x - 1][x + k])
-                if x + k < L - 1:
-                    dp[x][x + k] = max(dp[x][x + k], stoneSum(x, x + k) - dp[x][x + k + 1])
-                if k == 0:
-                    ans = max(ans, stoneSum(x, x + k) - dp[x][x + k])
-        print(dp)
-        return ans
+        # dp[x][y] = max(dp[x][y], max(stoneSum(x, y) - dp[x + 1][y], stoneSum(x, y) - dp[x][y - 1])
+        dp = [[0] * L for _ in range(L)]
+        for k in range(1, L, 1):
+            l = 0
+            r = l + k
+            while r < L:
+                dp[l][r] = max(stoneSum(l + 1, r) - dp[l + 1][r], stoneSum(l, r - 1) - dp[l][r - 1])
+                l += 1
+                r += 1
+        return dp[0][L - 1]
 
 
 stones = [5,3,1,4,2]
+#stones = [7,90,5,1,100,10,10,2]
 
 solution = Solution()
 print(solution.stoneGameVII(stones))

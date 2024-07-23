@@ -14,12 +14,18 @@ class Solution(object):
 
         # transfer
         for x in range(1, M):
+            from heapq import heapify, heappush, heappop
+            heap = list()
+            heapify(heap)
             for y in range(N):
-                for z in range(N):
-                    if y != z:
-                        dp[x][y] = min(dp[x][y], dp[x - 1][z])
-                dp[x][y] += grid[x][y]
-
+                heappush(heap, (dp[x - 1][y], y))
+            for y in range(N):
+                if y == heap[0][1]:
+                    top, idx = heappop(heap)
+                    dp[x][y] = heap[0][0] + grid[x][y]
+                    heappush(heap, (top, idx))
+                else:
+                    dp[x][y] = heap[0][0] + grid[x][y]
         print(dp)
 
         ans = min(dp[M - 1])
