@@ -4,7 +4,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        MODULO = 10e8 + 7
+        MODULO = 10e9 + 7
         dp = [0] * n
         dp[0] = 1
         for x in range(1, n):

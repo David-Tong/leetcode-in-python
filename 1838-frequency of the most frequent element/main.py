@@ -32,6 +32,7 @@ class Solution(object):
         if doFrequency(right, nums, prefix, k):
             return right
         else:
+<<<<<<< HEAD
             return left
 
 
@@ -55,3 +56,6 @@ k = 5
 
 solution = Solution()
 print(solution.maxFrequency(nums, k))
+=======
+            return left
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556

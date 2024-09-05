@@ -58,9 +58,14 @@ s = "abcab"
 p = "abc"
 removable = [0,1,2,3,4]
 
+<<<<<<< HEAD
 s = "abcabcabc"
 p = "abc"
 removable = [0,1,2,6,7,8]
 
 solution = Solution()
 print(solution.maximumRemovals(s, p, removable))
+=======
+solution = Solution()
+print(solution.maximumRemovals(s, p, removable))
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556

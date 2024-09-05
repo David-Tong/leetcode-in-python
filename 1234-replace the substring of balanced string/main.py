@@ -1,0 +1,63 @@
+class Solution(object):
+    def balancedString(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # pre-process
+        L = len(s)
+
+        from collections import defaultdict
+        dicts = defaultdict(int)
+        for ch in s:
+            dicts[ch] += 1
+
+        target = defaultdict(int)
+        for ch in dicts:
+            if dicts[ch] > L // 4:
+                target[ch] = dicts[ch] - L // 4
+
+        if not target:
+            return 0
+
+        # process
+        window = defaultdict(int)
+
+        def isValid():
+            for ch in target:
+                if ch not in window:
+                    return False
+                if window[ch] < target[ch]:
+                    return False
+            return True
+
+        left = 0
+        right = 0
+        ans = L
+        while right < L:
+            ch = s[right]
+            if ch in target:
+                window[ch] += 1
+            right += 1
+
+            while isValid():
+                ans = min(ans, right - left)
+                ch = s[left]
+                if ch in target:
+                    window[ch] -= 1
+                left += 1
+
+        return ans
+
+
+s = "QWER"
+s = "QQWE"
+s = "QQQW"
+s = "QQQQ"
+s = "QWEWEQWERQWEWERWQQQWERWQ"
+s = "QEQRWRRWWWRQQQWQQEQEQREWRQEQRQQRRQEW"
+s = "EQWEEEWERRWERQQQWWQEQWEEWQRWQWWWQWRWEWERWQEWWQWWQRRQWQERWWQRERRRRRWQEQRERRWRREEEERRWERQRQEWREQREWWEWRRRERWRRWEQWQQRRWQEREEEERWQWEWQEWRWREWQEREQWQEQWRQQQWRWWRWERWQWWQQREWREEWRWWQRWQRWWQWWREWWWEWQRWRRWQEWRRRWWQRRQREQRWRRQWREQWEQRWQRWQRWERRREEREEQQEREREWQQWRWEWEQQRWEWEQWEEQEEERWWWEQRRRWRQWWQQEQRWRWRWEQRRQRQRQWWWEQWERWEQRWQRERWQQQWWWQWRWEREWRQWQWERRQQWRQWRWQQQEEQREQWRWWEQRWWWEEERQWQWEWRQQRWQWEQQEWEWRQWWERERQREWWEEREQRRWQRRRWQEEWEWQEEEQRQQEWREQWQWRRWREQQQEEEWWRQEEEWQQEQEQWWREEWRQQQRQQEERQQQEEQWERRQEEQQRQQQWWEQEEQWRQWEQWEEQQEEQQEERQEEWQEEEWQRERRERQRQQQQWRQRRQQWQEEWRRQEWQWREWERWQRQQWEEERREQEEQWQQRWERWRWEEQWEREREWRWREEWRRRQEQQERRRERQRQWRWWREQQWWEQQWQWRRWEQRWEQQEQWWWQWWEWWEEEWEWRQWQWWQQQQEWRQEQWWRWWEQRRRWREREWRQQERQRQEQWWQQWRQRRQRWRQEEEWRRQREWRRERRQEEREERWEQQQWEWWEERWQWQQWWEQWWQWERRRWQWEEEEQEEWQRRWRWEEEWEWRREWWEQQERRQWQEWQQQRWEWRQEQWREWEWEEWWWWWWWWEQRWRRQQEEEERQEWQQEQQEEEWWRWRQQQQWRREEWRWWWQRWRWRWQWWEREQQEEEWREERQEWEERQWQREEQRQWEQEREQWWEWEEWREREWRQQWREEEEQRRWRWRQRRRWRQQQRRQQRQEWEEQQEREWQEEWEWWEQRRQWRQRQQREREQRWWQEEERREWRREWRRRQQQRQEQEWQWEEQQERQRRRWRRWWEEQRWQQQQQQWREWEWWRQREWREQRRQEQEERRQERWEEQRWWQRWQRWWERQEWEQERWRWQRQEEQEQEWWQWWRREEWEWWRRQEQQWEERWEWWWQEWWRRWRWQEERQRQWEQQEWWRRRRWQEWQQQQWWEEE"
+
+
+solution = Solution()
+print(solution.balancedString(s))
