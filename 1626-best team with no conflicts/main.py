@@ -31,7 +31,10 @@ class Solution(object):
 
         return max(dp.values())
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
 scores = [1,3,5,10,15]
 ages = [1,2,3,4,5]
 
@@ -41,5 +44,13 @@ ages = [2,1,2,1]
 scores = [1,2,3,5]
 ages = [8,9,10,1]
 
+<<<<<<< HEAD
+scores = [1,3,7,3,2,4,10,7,5]
+ages = [4,5,2,1,1,2,4,1,4]
+
 solution = Solution()
 print(solution.bestTeamScore(scores, ages))
+=======
+solution = Solution()
+print(solution.bestTeamScore(scores, ages))
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556

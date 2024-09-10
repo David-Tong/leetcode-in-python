@@ -40,5 +40,11 @@ h = 5
 piles = [30,11,23,4,20]
 h = 6
 
+<<<<<<< HEAD
+piles = [2]
+h = 1
+
+=======
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
 solution = Solution()
 print(solution.minEatingSpeed(piles, h))

@@ -19,6 +19,12 @@ class Solution(object):
 s = "aa"
 s = "abca"
 s = "cbzxy"
+<<<<<<< HEAD
+#s = "abcadddda"
+#s = "a"
+#s = "mgntdygtxrvxjnwksqhxuxtrv"
+=======
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
 
 solution = Solution()
 print(solution.maxLengthBetweenEqualCharacters(s))

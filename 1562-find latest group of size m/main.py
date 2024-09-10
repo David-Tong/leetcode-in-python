@@ -5,6 +5,11 @@ class Solution(object):
         :type m: int
         :rtype: int
         """
+<<<<<<< HEAD
+        # starts[x] = y - a group of 1 from x to y, included
+        # ends[x] = y - a group of 1 from y to x, included
+=======
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
         from collections import defaultdict
         starts = defaultdict(int)
         ends = defaultdict(int)
@@ -67,5 +72,17 @@ m = 1
 arr = [3,1,5,4,2]
 m = 2
 
+<<<<<<< HEAD
+arr = [1,2,3,4,5]
+m = 5
+
+arr = [4,3,2,1]
+m = 1
+
+arr = [3,2,5,6,10,8,9,4,1,7]
+m = 3
+
+=======
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
 solution = Solution()
 print(solution.findLatestStep(arr, m))

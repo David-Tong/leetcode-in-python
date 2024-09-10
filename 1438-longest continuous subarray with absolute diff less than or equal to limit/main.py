@@ -5,6 +5,9 @@ class Solution(object):
         :type limit: int
         :rtype: int
         """
+<<<<<<< HEAD
+
+=======
         L = len(nums)
 
         left = 0
@@ -51,3 +54,4 @@ limit = 1
 
 solution = Solution()
 print(solution.longestSubarray(nums, limit))
+>>>>>>> 8454ad0cbabb9eb52f0445fdebf643388dc21556
