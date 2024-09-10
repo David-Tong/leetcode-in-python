@@ -6,32 +6,34 @@ class Solution(object):
         """
         N = len(piles)
 
-        def take(idx, M, step):
-            key = str(idx) + "-" + str(M) + "-" + str(step)
+        def take(idx, M):
+            key = str(idx) + "-" + str(M)
             if key in self.cache:
                 return self.cache[key]
 
             if idx >= N:
-                return 0, 0
+                return 0
 
-            alice_max_stones = 0
-            bob_max_stones = 0
-            for x in range(1, 2 * M + 1):
-                alice_stones, bob_stones = take(idx + x, min(N // 2 + 1, max(M, x)), step + 1)
-                if step % 2 == 0:
-                    if alice_stones + sum(piles[idx: idx + x]) > alice_max_stones:
-                        alice_max_stones = alice_stones + sum(piles[idx: idx + x])
-                        bob_max_stones = bob_stones
-                else:
-                    if bob_stones + sum(piles[idx: idx + x]) > bob_max_stones:
-                        alice_max_stones = alice_stones
-                        bob_max_stones = bob_stones + sum(piles[idx: idx + x])
-            self.cache[key] = (alice_max_stones, bob_max_stones)
-            return alice_max_stones, bob_max_stones
+            if idx + 2 * M >= N:
+                return sum(piles[idx:])
+
+            min_max = float("-inf")
+            curr = 0
+            for x in range(0, 2 * M):
+                if idx + x < N:
+                    curr += piles[idx + x]
+                    min_max = max(min_max, curr - take(idx + x + 1, max(M, x + 1)))
+
+            self.cache[key] = min_max
+            return min_max
 
         from collections import defaultdict
-        self.cache = defaultdict(tuple)
-        return take(0, 1, 0)[0]
+        self.cache = defaultdict(int)
+
+        total = sum(piles)
+        ans = (total + take(0, 1)) / 2
+
+        return ans
 
 
 piles = [2,7,9,4,4]
