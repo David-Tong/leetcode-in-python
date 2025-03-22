@@ -19,9 +19,10 @@ class Solution(object):
         for ch in chs:
             dicts[ch] = [0] * N
 
-        for idx, word in enumerate(words):
-            for idx2, ch in enumerate(word):
-                dicts[ch][idx2] += 1
+        # dicts[ch][idx] - number of ch in idx th position in words dictionary
+        for word in words:
+            for idx, ch in enumerate(word):
+                dicts[ch][idx] += 1
 
         # short-cut
         for ch in target:
@@ -31,6 +32,8 @@ class Solution(object):
         # dp[x][y] - number of ways after xth character of target is selected
         #            and with yth character of any string in words used
         dp = [[0] * N for _ in range(M)]
+        # presum[x][y] - number of ways after xth character of target is selected
+        #                and with less and equal to yth character of any string in words used
         presum = [[] * N for _ in range(M)]
 
         for x in range(M):

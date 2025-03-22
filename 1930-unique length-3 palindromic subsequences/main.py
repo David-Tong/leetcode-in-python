@@ -14,6 +14,7 @@ class Solution(object):
                     prefix[idx + 1][x] = prefix[idx][x] + 1
                 else:
                     prefix[idx + 1][x] = prefix[idx][x]
+        print(prefix)
 
         # process
         palindromes = set()
@@ -24,13 +25,16 @@ class Solution(object):
                     palindromes.add(palindrome)
 
         ans = len(palindromes)
-        print(palindromes)
+        # print(palindromes)
         return ans
 
 
 s = "aabca"
+"""
 s = "adc"
 s = "bbcbaba"
+s = "aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzzaaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzz"
+"""
 
 solution = Solution()
 print(solution.countPalindromicSubsequence(s))

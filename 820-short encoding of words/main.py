@@ -23,12 +23,12 @@ class Solution(object):
 
         self.ans = 0
         def doSearch(curr, depth):
-            if len(curr.nodes) == 0:
+            if len(curr.parents) == 0:
                 self.ans += depth
                 return
 
-            for key in curr.nodes:
-                doSearch(curr.nodes[key], depth + 1)
+            for key in curr.parents:
+                doSearch(curr.parents[key], depth + 1)
 
         doSearch(trie, 1)
         return self.ans

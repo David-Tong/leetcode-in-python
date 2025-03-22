@@ -33,18 +33,18 @@ class Solution(object):
             if trie.leaf:
                 ans.add(trie.word)
 
-            if len(trie.nodes) == 0:
+            if len(trie.parents) == 0:
                 return
 
-            if x < 0 or x >= M or y < 0 or y >= N or board[x][y] not in trie.nodes:
+            if x < 0 or x >= M or y < 0 or y >= N or board[x][y] not in trie.parents:
                 return
 
             curr = board[x][y]
             board[x][y] = "#"
-            dfs(board, x - 1, y, trie.nodes[curr])
-            dfs(board, x + 1, y, trie.nodes[curr])
-            dfs(board, x, y - 1, trie.nodes[curr])
-            dfs(board, x, y + 1, trie.nodes[curr])
+            dfs(board, x - 1, y, trie.parents[curr])
+            dfs(board, x + 1, y, trie.parents[curr])
+            dfs(board, x, y - 1, trie.parents[curr])
+            dfs(board, x, y + 1, trie.parents[curr])
             board[x][y] = curr
 
         for x in range(M):

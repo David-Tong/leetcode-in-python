@@ -38,14 +38,14 @@ class Solution(object):
                 return
 
             ch = board[x][y]
-            if ch not in trie.nodes:
+            if ch not in trie.parents:
                 return
 
-            curr = trie.nodes[ch]
+            curr = trie.parents[ch]
             if curr.leaf:
                 ans.add(curr.word)
 
-            if curr.nodes:
+            if curr.parents:
                 board[x][y] = "#"
                 dfs(board, x - 1, y, curr)
                 dfs(board, x + 1, y, curr)
@@ -56,8 +56,8 @@ class Solution(object):
             # every leaf node in the trie tree is a matched word
             # we may delete it from the trie tree since it can be matched for only once
             # we will trim the trie tree continuously in the search space
-            if not curr.nodes:
-                trie.nodes.pop(ch)
+            if not curr.parents:
+                trie.parents.pop(ch)
 
         # search for the board
         for x in range(M):
