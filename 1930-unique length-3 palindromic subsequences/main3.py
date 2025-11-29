@@ -6,29 +6,35 @@ class Solution(object):
         """
         # pre-process
         L = len(s)
-        from collections import defaultdict
-        first, last = defaultdict(int), defaultdict(int)
+        prefix = [[0] * 26 for _ in range(L + 1)]
 
         for idx, ch in enumerate(s):
-            if ch not in first:
-                first[ch] = idx
-            last[ch] = idx
+            for x in range(26):
+                if x == ord(ch) - ord('a'):
+                    prefix[idx + 1][x] = prefix[idx][x] + 1
+                else:
+                    prefix[idx + 1][x] = prefix[idx][x]
+        print(prefix)
 
         # process
         palindromes = set()
-        for x in range(1, L - 1):
-            for ch in first:
-                if first[ch] < x and last[ch] > x:
-                    palindrome = "{}{}{}".format(ch, s[x], ch)
+        for x in range(L):
+            for y in range(26):
+                if prefix[x][y] > 0 and prefix[L][y] - prefix[x + 1][y] > 0:
+                    palindrome = chr(ord('a') + y) + s[x] + chr(ord('a') + y)
                     palindromes.add(palindrome)
+
         ans = len(palindromes)
+        # print(palindromes)
         return ans
 
 
 s = "aabca"
+"""
 s = "adc"
 s = "bbcbaba"
 s = "aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzzaaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzz"
+"""
 
 solution = Solution()
 print(solution.countPalindromicSubsequence(s))

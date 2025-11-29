@@ -17,7 +17,7 @@ class Solution(object):
         quotients = list()
 
         integer = "0"
-        if numerator > denominator:
+        if numerator >= denominator:
             integer = str(numerator // denominator)
             numerator = numerator % denominator
 
@@ -78,6 +78,9 @@ denominator = 333
 
 numerator = 1
 denominator = 214748364
+
+numerator = 1
+denominator = -1
 
 solution = Solution()
 print(solution.fractionToDecimal(numerator, denominator))

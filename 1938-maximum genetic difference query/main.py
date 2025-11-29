@@ -10,14 +10,14 @@ class Trie(object):
             if d not in curr.nodes:
                 curr.nodes[d] = Trie()
             curr = curr.nodes[d]
-            curr.count += 1
+            curr.cnt += 1
 
     def query(self, val):
         curr = self
         res = 0
         for x in range(31, -1, -1):
             d = (val >> x) & 1
-            if 1 - d in curr.nodes and curr.nodes[1 - d].count > 0:
+            if 1 - d in curr.nodes and curr.nodes[1 - d].cnt > 0:
                 curr = curr.nodes[1 - d]
                 res = res * 2 + 1 - d
             else:
@@ -30,7 +30,7 @@ class Trie(object):
         for x in range(31, -1, -1):
             d = (node >> x) & 1
             curr = curr.nodes[d]
-            curr.count -= 1
+            curr.cnt -= 1
 
 
 class Solution(object):

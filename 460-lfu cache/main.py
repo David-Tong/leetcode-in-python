@@ -31,15 +31,15 @@ class LFUCache(object):
         node = self.cache[key]
 
         # delete the node from counter
-        del self.counter[node.count][key]
-        if not self.counter[node.count]:
-            del self.counter[node.count]
+        del self.counter[node.cnt][key]
+        if not self.counter[node.cnt]:
+            del self.counter[node.cnt]
 
         # count++
-        node.count += 1
+        node.cnt += 1
 
         # insert the node back to counter
-        self.counter[node.count][key] = node
+        self.counter[node.cnt][key] = node
 
         if self.mini not in self.counter:
             self.mini += 1
