@@ -17,7 +17,7 @@ class Solution(object):
 
         # helper function
         # find the existing character greater than ch
-        def advance(ch):
+        def greater(ch):
             idx = 0
             while idx < K:
                 key = keys[idx]
@@ -28,16 +28,32 @@ class Solution(object):
             return None
 
         # make the string in a lexicographically smallest way'
-        def compose(idx, advanced):
+        def compose():
             res = ""
             for key in keys:
                 if dicts[key] > 0:
                     res += key * dicts[key]
-            res = target[:idx] + str(advanced) + res
+            return res
+
+        # find the next greater permutation
+        def advance(s):
+            res = list(s)
+            idx = L - 1
+            while idx > 0 and s[idx - 1] >= s[idx]:
+                idx -= 1
+            if idx > 0:
+                idx -= 1
+                idx2 = L - 1
+                while idx2 > idx and s[idx2] <= s[idx]:
+                    idx2 -= 1
+                res[idx2], res[idx] = res[idx], res[idx2]
+                res[idx + 1:] = reversed(res[idx + 1:])
+                res = "".join(res)
+            else:
+                res = ""
             return res
 
         # process
-        # map s to target exactly, as much as possible
         idx = 0
         while idx < L:
             ch = target[idx]
@@ -47,36 +63,35 @@ class Solution(object):
                 break
             idx += 1
 
-        # reach the rightest position where s can map to target exactly
-        # use a generic algorithm, no matter if s contains same characters as target
-
-        # step 1: reach the rightest matches position
-        # check if reach the end
-        if idx < L:
-            ch = target[idx]
-            advanced = advance(ch)
-            if advanced is not None:
-                dicts[advanced] -= 1
-                return compose(idx, advanced)
-        idx -= 1
-
-        # step 2 : traceback to find the next greater string
-        while idx >= 0:
-            ch = target[idx]
-            advanced = advance(ch)
-            if advanced is not None:
-                dicts[ch] += 1
-                dicts[advanced] -= 1
-                return compose(idx, advanced)
-            ch2 = target[idx]
-            dicts[ch2] += 1
-            idx -= 1
-        return ""
+        # if s == target
+        if idx == L:
+            ans = advance(target)
+        # else
+        else:
+            ans = ""
+            back = False
+            while idx >= 0:
+                ch = target[idx]
+                candidate = greater(ch)
+                if candidate is not None:
+                    if back:
+                        dicts[ch] += 1
+                    dicts[candidate] -= 1
+                    ans = target[:idx] + candidate + compose()
+                    break
+                if not back:
+                    back = True
+                else:
+                    ch2 = target[idx]
+                    dicts[ch2] += 1
+                idx -= 1
+        return ans
 
 
 s = "abc"
 target = "bba"
 
+"""
 s = "leet"
 target = "code"
 
@@ -101,7 +116,6 @@ target = "ab"
 s = "aab"
 target = "aab"
 
-"""
 s = "aab"
 target = "aba"
 
@@ -110,10 +124,12 @@ target = "abb"
 
 s = "aab"
 target = "bab"
+"""
 
 s = "abb"
 target = "abb"
 
+"""
 from random import choice
 from string import ascii_lowercase
 s = "".join(choice(ascii_lowercase) for _ in range(300))
